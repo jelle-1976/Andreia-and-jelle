@@ -332,9 +332,74 @@
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
   }
+
+  /* ---------- LANGUAGE SWITCHER ---------- */
+  .language-switcher{
+    position:fixed;
+    top:1rem;
+    right:1rem;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    gap:0.35rem;
+    padding:0.48rem 0.68rem;
+    border:1px solid rgba(255,253,248,0.38);
+    background:rgba(14,59,60,0.70);
+    color:#fffdf8;
+    border-radius:999px;
+    box-shadow:0 6px 22px rgba(0,0,0,0.12);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    font-family:'Jost',sans-serif;
+    font-size:0.68rem;
+    font-weight:500;
+    letter-spacing:0.08em;
+  }
+  .language-switcher .globe{
+    font-size:0.88rem;
+    line-height:1;
+    margin-right:0.05rem;
+  }
+  .language-switcher button{
+    appearance:none;
+    border:0;
+    background:none;
+    color:rgba(255,253,248,0.65);
+    font:inherit;
+    letter-spacing:inherit;
+    cursor:pointer;
+    padding:0.08rem 0.12rem;
+    transition:color 0.2s ease, opacity 0.2s ease;
+  }
+  .language-switcher button:hover,
+  .language-switcher button.active{
+    color:#fffdf8;
+  }
+  .language-switcher .divider{
+    color:rgba(255,253,248,0.38);
+  }
+  @media (max-width:600px){
+    .language-switcher{
+      top:0.72rem;
+      right:0.72rem;
+      padding:0.42rem 0.58rem;
+      font-size:0.62rem;
+    }
+  }
+
 </style>
 </head>
 <body>
+
+<div class="language-switcher" aria-label="Language selector">
+  <span class="globe" aria-hidden="true">🌐</span>
+  <button type="button" data-lang="en" class="active" aria-pressed="true">EN</button>
+  <span class="divider" aria-hidden="true">|</span>
+  <button type="button" data-lang="pt" aria-pressed="false">PT</button>
+  <span class="divider" aria-hidden="true">|</span>
+  <button type="button" data-lang="nl" aria-pressed="false">NL</button>
+</div>
+
 
 <!-- ============ HERO ============ -->
 <section class="hero">
@@ -541,7 +606,7 @@
 <section class="guestbook">
   <div class="section-head">
     <div class="eyebrow">Leave Us a Note</div>
-    <p class="serif" style="font-size:1.3rem; color:var(--teal-deep); max-width:36ch; margin:0.6rem auto 0; line-height:1.5;">Share a wish, a memory, or simply say hello, we'd love to hear from you.</p>
+    <p class="serif" style="font-size:1.3rem; color:var(--teal-deep); max-width:36ch; margin:0.6rem auto 0; line-height:1.5;">Share a wish, a memory, or simply say hello—we'd love to hear from you.</p>
   </div>
 
   <div class="guestbook-box">
@@ -610,6 +675,113 @@
       });
     });
   });
+</script>
+
+
+<script>
+(() => {
+  const translations = {"en": {"title": "Our Wedding — 19.09 — Seychelles Honeymoon Fund", "heroNote": "“Having found each other, we don't need much more. But if you'd like to give us something beyond your presence on the day, we would truly appreciate your generosity through our wedding registry, or by becoming part of the memories we'll create during our honeymoon in the Seychelles.”", "heroSign": "With love — the soon-to-be-married", "story1": "From different countries, different paths and different lives, we somehow found each other exactly when we were meant to.", "story2": "Now, surrounded by the people we love most, we're looking forward to beginning our greatest adventure together.", "registryEye": "Gift Registry", "registryText": "For anything for our home, our list is set up at El Corte Inglés.", "registryButton": "View the Registry", "honeymoonEye": "Our Honeymoon", "honeymoonTitle": "Seychelles, one moment at a time", "honeymoonText": "If you wish, you may choose one of the experiences below as your wedding gift.", "giftExperience": "Gift this experience", "memory": "Be part of this memory", "bank": "Bank transfer (IBAN)", "copy": "Copy", "account": "Account name: A. Oliveira", "reference": "Reference", "copied": "Copied", "manual": "Select and copy manually", "ticketTitles": ["Marine Park Adventure", "Sunset dinner", "Giant tortoise excursion", "Champagne on the beach"], "backLabels": ["Marine Park Adventure · €250", "Sunset dinner · €150", "Tortoise excursion · €100", "Champagne on the beach · €50"], "references": ["Marine Park Adventure", "Sunset dinner", "Giant tortoise excursion", "Champagne on the beach"], "guestEye": "Leave Us a Note", "guestText": "Share a wish, a memory, or simply say hello—we'd love to hear from you.", "footer": "Thank you for celebrating this special chapter with us. Your love, presence and generosity mean more to us than words can express.", "footerSmall": "Andreia & Jelle · 19 September 2026"}, "pt": {"title": "O nosso casamento — 19.09 — Lua de mel nas Seychelles", "heroNote": "“Tendo-nos encontrado, não precisamos de muito mais. Mas, caso desejem oferecer-nos algo para além da vossa presença neste dia, agradeceremos muito a vossa generosidade através da nossa lista de casamento ou fazendo parte das memórias que iremos criar durante a nossa lua de mel nas Seychelles.”", "heroSign": "Com amor — os noivos", "story1": "Vindos de países diferentes, por caminhos e vidas diferentes, encontrámo-nos exatamente no momento certo.", "story2": "Agora, rodeados pelas pessoas que mais amamos, estamos ansiosos por começar juntos a nossa maior aventura.", "registryEye": "Lista de casamento", "registryText": "Para presentes para a nossa casa, a nossa lista está disponível no El Corte Inglés.", "registryButton": "Ver a lista", "honeymoonEye": "A nossa lua de mel", "honeymoonTitle": "Seychelles, um momento de cada vez", "honeymoonText": "Caso desejem, podem escolher uma das experiências abaixo como presente de casamento.", "giftExperience": "Oferecer esta experiência", "memory": "Façam parte desta memória", "bank": "Transferência bancária (IBAN)", "copy": "Copiar", "account": "Titular da conta: A. Oliveira", "reference": "Referência", "copied": "Copiado", "manual": "Selecione e copie manualmente", "ticketTitles": ["Aventura no Parque Marinho", "Jantar ao pôr do sol", "Excursão às tartarugas-gigantes", "Champanhe na praia"], "backLabels": ["Aventura no Parque Marinho · €250", "Jantar ao pôr do sol · €150", "Excursão às tartarugas · €100", "Champanhe na praia · €50"], "references": ["Aventura no Parque Marinho", "Jantar ao pôr do sol", "Excursão às tartarugas-gigantes", "Champanhe na praia"], "guestEye": "Deixem-nos uma mensagem", "guestText": "Partilhem um desejo, uma memória ou simplesmente digam olá—teremos muito gosto em ler a vossa mensagem.", "footer": "Obrigada por celebrarem connosco este capítulo tão especial. O vosso carinho, presença e generosidade significam para nós mais do que as palavras conseguem expressar.", "footerSmall": "Andreia & Jelle · 19 de setembro de 2026"}, "nl": {"title": "Onze bruiloft — 19.09 — Huwelijksreis naar de Seychellen", "heroNote": "“Nu we elkaar hebben gevonden, hebben we niet veel meer nodig. Maar als jullie ons naast jullie aanwezigheid op deze dag iets willen schenken, waarderen we jullie gulheid enorm via onze huwelijkslijst of door deel uit te maken van de herinneringen die we tijdens onze huwelijksreis op de Seychellen zullen creëren.”", "heroSign": "Liefs — het aanstaande bruidspaar", "story1": "Uit verschillende landen, via verschillende wegen en met verschillende levens vonden we elkaar precies op het moment waarop het zo moest zijn.", "story2": "Nu, omringd door de mensen van wie we het meest houden, kijken we ernaar uit om samen aan ons grootste avontuur te beginnen.", "registryEye": "Huwelijkslijst", "registryText": "Voor cadeaus voor ons huis hebben we een huwelijkslijst bij El Corte Inglés.", "registryButton": "Bekijk de huwelijkslijst", "honeymoonEye": "Onze huwelijksreis", "honeymoonTitle": "Seychellen, één bijzonder moment tegelijk", "honeymoonText": "Wie dat graag wil, kan een van de onderstaande ervaringen als huwelijkscadeau kiezen.", "giftExperience": "Schenk deze ervaring", "memory": "Maak deel uit van deze herinnering", "bank": "Bankoverschrijving (IBAN)", "copy": "Kopiëren", "account": "Rekeninghouder: A. Oliveira", "reference": "Omschrijving", "copied": "Gekopieerd", "manual": "Selecteer en kopieer handmatig", "ticketTitles": ["Avontuur in het Marine Park", "Diner bij zonsondergang", "Excursie naar de reuzenschildpadden", "Champagne op het strand"], "backLabels": ["Avontuur in het Marine Park · €250", "Diner bij zonsondergang · €150", "Schildpaddenexcursie · €100", "Champagne op het strand · €50"], "references": ["Marine Park-avontuur", "Diner bij zonsondergang", "Excursie reuzenschildpadden", "Champagne op het strand"], "guestEye": "Laat een berichtje achter", "guestText": "Deel een wens, een herinnering of zeg gewoon hallo—we horen graag van jullie.", "footer": "Dank jullie wel dat jullie dit bijzondere hoofdstuk met ons vieren. Jullie liefde, aanwezigheid en gulheid betekenen meer voor ons dan woorden kunnen uitdrukken.", "footerSmall": "Andreia & Jelle · 19 september 2026"}};
+
+  const setText = (selector, value) => {
+    const el = document.querySelector(selector);
+    if (el && value !== undefined) el.textContent = value;
+  };
+  const setAll = (selector, value) => {
+    document.querySelectorAll(selector).forEach(el => el.textContent = value);
+  };
+  const setArray = (selector, values) => {
+    document.querySelectorAll(selector).forEach((el, index) => {
+      if (values[index] !== undefined) el.textContent = values[index];
+    });
+  };
+
+  function applyLanguage(lang) {
+    if (!translations[lang]) lang = 'en';
+    const t = translations[lang];
+
+    document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
+    document.title = t.title;
+
+    setText('.hero-note', t.heroNote);
+    setText('.hero-sign', t.heroSign);
+    setArray('.story-inner p', [t.story1, t.story2]);
+
+    setText('.registry-card .eyebrow', t.registryEye);
+    setText('.registry-card p', t.registryText);
+    setText('.registry-card .btn', t.registryButton);
+
+    setText('.fund .section-head .eyebrow', t.honeymoonEye);
+    setText('.fund .section-head h2', t.honeymoonTitle);
+    setText('.fund .section-head p', t.honeymoonText);
+
+    setArray('.ticket-front h3', t.ticketTitles);
+    setAll('.ticket-front .tap', t.giftExperience);
+    setArray('.ticket-back .eyebrow', t.backLabels);
+    setAll('.ticket-back h3', t.memory);
+    setAll('.pay-label:first-child', t.bank);
+    setAll('.copy-btn', t.copy);
+    const tickets = document.querySelectorAll('.ticket');
+    document.querySelectorAll('.acc-name').forEach(name => {
+      const value = name.textContent.trim().toLowerCase();
+      if (value.startsWith('account name:') ||
+          value.startsWith('titular da conta:') ||
+          value.startsWith('rekeninghouder:')) {
+        name.textContent = t.account;
+      }
+    });
+
+    tickets.forEach((ticket, index) => {
+      const names = ticket.querySelectorAll('.acc-name');
+      names.forEach(name => {
+        if (name.textContent.trim().toLowerCase().startsWith('reference:') ||
+            name.textContent.trim().toLowerCase().startsWith('referência:') ||
+            name.textContent.trim().toLowerCase().startsWith('omschrijving:')) {
+          name.textContent = `${t.reference}: ${t.references[index]}`;
+        }
+      });
+      const copied = ticket.querySelector('.copied');
+      if (copied) {
+        copied.textContent = t.copied;
+        copied.dataset.defaultText = t.copied;
+        copied.dataset.manualText = t.manual;
+      }
+    });
+
+    setText('.guestbook .section-head .eyebrow', t.guestEye);
+    setText('.guestbook .section-head .serif', t.guestText);
+    setText('footer .serif', t.footer);
+    setText('footer .small', t.footerSmall);
+
+    document.querySelectorAll('.language-switcher button').forEach(btn => {
+      const active = btn.dataset.lang === lang;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', String(active));
+    });
+
+    try { localStorage.setItem('weddingLanguage', lang); } catch (e) {}
+  }
+
+  document.querySelectorAll('.language-switcher button').forEach(btn => {
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+  });
+
+  let preferred = 'en';
+  try { preferred = localStorage.getItem('weddingLanguage') || 'en'; } catch (e) {}
+  applyLanguage(preferred);
+
+  // Make the existing copy fallback use the active language.
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const note = btn.closest('.pay-methods')?.querySelector('.copied');
+      if (!note) return;
+      setTimeout(() => {
+        if (note.textContent === 'Select and copy manually') {
+          note.textContent = note.dataset.manualText || note.textContent;
+        }
+      }, 0);
+    }, true);
+  });
+})();
 </script>
 
 </body>
