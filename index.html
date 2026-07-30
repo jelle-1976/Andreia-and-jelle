@@ -392,6 +392,20 @@
     }
   }
 
+
+.cusdis-preview{
+  max-width:900px;
+  margin:2rem auto 0;
+  padding:1.5rem;
+  background:#fffdf8;
+  border:1px solid rgba(14,59,60,.15);
+  border-radius:14px;
+}
+.cusdis-preview h3{
+  font-family:'Cormorant Garamond',serif;
+  margin-bottom:.75rem;
+}
+
 </style>
 </head>
 <body>
@@ -615,9 +629,15 @@
   </div>
 
   <div class="guestbook-box">
-    <div id="cusdis_thread"
+    <div class="cusdis-preview">
+<h3>Latest Message</h3>
+<p style="opacity:.7;margin-bottom:.75rem;">The newest approved message will appear here. Older messages remain below in the full guestbook.</p>
+<div id="latest-comment-preview"></div>
+</div>
+
+<div id="cusdis_thread"
       data-host="https://cusdis.com"
-      data-app-id="93dcc0d8-0a52-4960-a3e7-ccbf49131640"
+      data-app-id="YOUR-CUSDIS-APP-ID"
       data-page-id="andreia-jelle-wedding"
       data-page-url="https://andreia-and-jelle.com/"
       data-page-title="Andreia & Jelle — Wedding"
@@ -787,6 +807,23 @@
     }, true);
   });
 })();
+</script>
+
+
+<script>
+window.addEventListener('load',function(){
+  const target=document.getElementById('latest-comment-preview');
+  const observer=new MutationObserver(()=>{
+    const first=document.querySelector('#cusdis_thread .comment')||
+                 document.querySelector('#cusdis_thread article')||
+                 document.querySelector('#cusdis_thread [class*="comment"]');
+    if(first && target && !target.hasChildNodes()){
+      target.appendChild(first.cloneNode(true));
+    }
+  });
+  const thread=document.getElementById('cusdis_thread');
+  if(thread){observer.observe(thread,{childList:true,subtree:true});}
+});
 </script>
 
 </body>
