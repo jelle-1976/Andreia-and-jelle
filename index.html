@@ -362,7 +362,8 @@
     text-align:center;
     padding:6vh 6vw 5vh;
   }
-  footer .serif{ font-size:1.3rem; color:var(--teal-deep); max-width:43ch; margin:0 auto; line-height:1.5; }
+  footer .serif{ font-size:1.3rem; color:var(--teal-deep); max-width:52ch; margin:0 auto; line-height:1.5; }
+  footer .footer-line{ display:block; }
   footer .small{ margin-top:1.4rem; font-size:0.88rem; letter-spacing:0.1em; color:rgba(22,36,31,0.5); text-transform:uppercase; }
 
   ::selection{ background:var(--coral); color:#fff; }
@@ -743,7 +744,7 @@
 
 <!-- ============ FOOTER ============ -->
 <footer>
-  <div class="serif">Thank you for celebrating this special chapter with us. Your love, presence and generosity mean more to us than words can express</div>
+  <div class="serif"><span class="footer-line">Thank you for celebrating this special chapter with us.</span><span class="footer-line">Your love, presence and generosity</span><span class="footer-line">mean more to us than words can express.</span></div>
   <div class="small">Andreia &amp; Jelle · 19 September 2026</div>
 </footer>
 
@@ -869,7 +870,17 @@
 
     setText('.guestbook .section-head .eyebrow', t.guestEye);
     setText('.guestbook .section-head .serif', t.guestText);
-    setText('footer .serif', t.footer);
+    const footerSerif = document.querySelector('footer .serif');
+    if (footerSerif) {
+      if (lang === 'en') {
+        footerSerif.innerHTML =
+          '<span class="footer-line">Thank you for celebrating this special chapter with us.</span>' +
+          '<span class="footer-line">Your love, presence and generosity</span>' +
+          '<span class="footer-line">mean more to us than words can express.</span>';
+      } else {
+        footerSerif.textContent = t.footer;
+      }
+    }
     setText('footer .small', t.footerSmall);
 
     document.querySelectorAll('.language-switcher button').forEach(btn => {
